@@ -25,10 +25,13 @@ func init() {
 
 	// register database
 	orm.RegisterDriver(driver, orm.DRPostgres)
-	orm.RegisterDataBase(defaultName, driver, conn)
-
-	u, _ := url.Parse(conn)
-	logs.Info("database connected: user: %s | host: %s | database: %s", u.User.Username(), u.Host, u.Path[1:])
+	err := orm.RegisterDataBase(defaultName, driver, conn)
+	if err != nil {
+		logs.Error("database error: %v", err)
+	} else {
+		u, _ := url.Parse(conn)
+		logs.Info("database connected: user: %s | host: %s | database: %s", u.User.Username(), u.Host, u.Path[1:])
+	}
 }
 
 func getDatabaseURL() string {
