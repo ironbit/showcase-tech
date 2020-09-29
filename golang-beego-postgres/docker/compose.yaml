@@ -7,7 +7,7 @@ services:
       - ../env/app-srv.env
     build:
       context: ..
-      dockerfile: docker/app.dockerfile
+      dockerfile: docker/srv.dockerfile
     ports:
       - "${APP_PORT}:${APP_PORT}"
     depends_on:

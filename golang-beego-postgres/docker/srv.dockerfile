@@ -9,11 +9,11 @@ COPY app .
 RUN go mod download
 
 # Build the application
-RUN env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o app-bin main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app-bin main.go
 
 
-# Select parent image (alpine) for running the application
-FROM scratch as bin
+# Select parent image (debian) for running the application
+FROM alpine:latest
 
 # Change to working directory /deploy
 WORKDIR /deploy/
@@ -21,8 +21,12 @@ WORKDIR /deploy/
 # Copy application binary
 COPY --from=builder /build/app-bin .
 
+# Copy config file
+RUN mkdir /deploy/conf
+COPY --from=builder /build/conf/app.conf /deploy/conf
+
 # Open the port in the container
 EXPOSE $APP_PORT
 
 # Execute binary
-CMD ["./app-bin"]  
+CMD ["nohup", "/deploy/app-bin"]
