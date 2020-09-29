@@ -9,11 +9,11 @@ COPY app .
 RUN go mod download
 
 # Build the application
-RUN go build -o app-bin main.go
+RUN env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o app-bin main.go
 
 
 # Select parent image (alpine) for running the application
-FROM alpine:latest
+FROM scratch as bin
 
 # Change to working directory /deploy
 WORKDIR /deploy/
