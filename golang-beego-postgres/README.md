@@ -68,3 +68,191 @@ $ docker network ls
 ```bash
 $ docker volume ls
 ```
+
+## Web API
+### Summary
+* **POST /v1/author**
+* **POST /v1/book**
+* **GET /v1/books**
+* **GET /v1/books?genre="genre"**
+* **GET /v1/book/{book_id}**
+* **GET /v1/authors**
+* **GET /v1/author/{author_id}**
+
+### API
+#### **POST /v1/author**
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"name":"Isaac Asimov"}' http://localhost:12345/v1/author
+```
+###### Request
+```json
+{
+  "name": "Isaac Asimov"
+}
+```
+
+###### Response
+```json
+{
+  "id": 1
+}
+```
+
+#### **POST /v1/book**
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"name":"The End of Eternity","genre":"Science Fiction","author":["Isaac Asimov"]}' http://localhost:12345/v1/book
+```
+###### Request
+```json
+{
+  "name": "The End of Eternity",
+  "genre": "Science Fiction",
+  "author": [
+    "Isaac Asimov"
+  ]
+}
+```
+
+###### Response
+```json
+{
+  "id": 1
+}
+```
+
+#### **GET /v1/books**
+```bash
+curl -X GET http://localhost:12345/v1/books
+```
+###### Response
+```json
+[
+  {
+    "id": 1,
+    "name": "The End of Eternity",
+    "genre": "Science Fiction",
+    "author": [
+      {
+        "id": 1,
+        "name": "Isaac Asimov"
+      }
+    ]
+  },{
+    "id": 2,
+    "name": "The Talisman",
+    "genre": "Dark Fantasy",
+    "author": [
+      {
+        "id": 2,
+        "name": "Stephen King"
+      },{
+        "id": 3,
+        "name": "Peter Straub"
+      }
+    ]
+  }
+]
+```
+
+#### **GET /v1/books?genre="genre"**
+```bash
+curl -X GET http://localhost:12345/v1/books?genre="Science Fiction"
+```
+###### Response
+```json
+[
+  {
+    "id": 1,
+    "name": "The End of Eternity",
+    "genre": "Science Fiction",
+    "author": [
+      {
+        "id": 1,
+        "name": "Isaac Asimov"
+      }
+    ]
+  },{
+    "id": 3,
+    "name": "Robot Visions",
+    "genre": "Science Fiction",
+    "author": [
+      {
+        "id": 1,
+        "name": "Isaac Asimov"
+      }
+    ]
+  }
+]
+```
+
+#### **GET /v1/book/{book_id}**
+```bash
+curl -X GET http://localhost:12345/v1/book/1
+```
+###### Response
+```json
+{
+  "id": 1,
+  "name": "The End of Eternity",
+  "genre": "Science Fiction",
+  "author": [
+    {
+      "id": 1,
+      "name": "Isaac Asimov"
+    }
+  ]
+}
+```
+
+#### **GET /v1/authors**
+```bash
+curl -X GET http://localhost:12345/v1/authors
+```
+###### Response
+```json
+[
+  {
+    "id": 1,
+    "name": "Isaac Asimov",
+    "books": [
+      {
+        "id": 1,
+        "name": "The End of Eternity"
+      },{
+        "id": 3,
+        "name": "Robot Visions",
+      }
+    ]
+  },{
+    "id": 2,
+    "name": "Stephen King",
+    "books": [
+      {
+        "id": 2,
+        "name": "The Talisman"
+      }
+    ]
+  }
+]
+```
+
+#### **GET /v1/author/{author_id}**
+```bash
+curl -X GET http://localhost:12345/v1/author/1
+```
+###### Response
+```json
+{
+  "id": 1,
+  "name": "Isaac Asimov",
+  "books": [
+    {
+      "id": 1,
+      "name": "The End of Eternity"
+    },{
+      "id": 3,
+      "name": "Robot Visions",
+    }
+  ]
+}
+```
