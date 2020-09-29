@@ -20,6 +20,16 @@ up: _load-env
 	env APP_PORT=${APP_PORT} DATABASE_PORT=${DATABASE_PORT} \
 	docker-compose -p app -f docker/compose.yaml up
 
+.PHONY: up-server
+up-server: _load-env
+	env APP_PORT=${APP_PORT} DATABASE_PORT=${DATABASE_PORT} \
+	docker-compose -p app -f docker/compose.yaml up srv
+
+.PHONY: up-database
+up-database: _load-env
+	env APP_PORT=${APP_PORT} DATABASE_PORT=${DATABASE_PORT} \
+	docker-compose -p app -f docker/compose.yaml up db
+
 .PHONY: down
 down: _load-env
 	env APP_PORT=${APP_PORT} DATABASE_PORT=${DATABASE_PORT} \
