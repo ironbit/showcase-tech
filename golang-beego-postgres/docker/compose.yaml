@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  srv:
+    image: alpine:latest
+    env_file: ../env/app-srv.env
+    build:
+      context: ..
+      dockerfile: docker/app.dockerfile
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - db
+    networks:
+      - net
+
+  db:
+    image: postgres:alpine
+    env_file: ../env/app-db.env
+    ports:
+      - "5432:5432"
+    networks:
+      - net
+    volumes:
+      - vol:/var/lib/postgresql/data
+      - ../sql:/docker-entrypoint-initdb.d/
+
+networks:
+  net:
+
+volumes:
+  vol:
