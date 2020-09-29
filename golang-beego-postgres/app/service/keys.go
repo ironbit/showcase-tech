@@ -10,4 +10,6 @@ const (
 	TimeInitialKey = "TimeInitialKey"
 	// TimeElapsedKey is used to store the duration of the request.
 	TimeElapsedKey = "TimeElapsedKey"
+	// RequestCounterKey is used to store the number of requests.
+	RequestCounterKey = "RequestCounterKey"
 )
