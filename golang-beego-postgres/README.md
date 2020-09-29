@@ -1,4 +1,4 @@
-# Golang - Beego - Potsgres
+# Golang - Beego - Postgres
 
 ## Develop
 1. Generate the Rest API application called **app** using the **bee** script.
