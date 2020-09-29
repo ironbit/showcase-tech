@@ -3,6 +3,7 @@ package main
 import (
 	_ "github.com/lib/pq"
 
+	_ "sketch-tech/golang-beego-postgres/app/config"
 	_ "sketch-tech/golang-beego-postgres/app/db"
 	_ "sketch-tech/golang-beego-postgres/app/routers"
 
