@@ -2,8 +2,9 @@ version: "3.8"
 
 services:
   srv:
-    image: alpine:latest
-    env_file: ../env/app-srv.env
+    env_file:
+      - ../env/app-db.env
+      - ../env/app-srv.env
     build:
       context: ..
       dockerfile: docker/app.dockerfile
@@ -18,7 +19,7 @@ services:
     image: postgres:alpine
     env_file: ../env/app-db.env
     ports:
-      - "5432:5432"
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
     networks:
       - net
     volumes:
