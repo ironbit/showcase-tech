@@ -9,7 +9,7 @@ type Book struct {
 	Authors []*Author `json:"authors,omitempty" orm:"rel(m2m)"`
 }
 
-// TableName
+// TableName of the book structure.
 func (*Book) TableName() string {
 	return "book"
 }

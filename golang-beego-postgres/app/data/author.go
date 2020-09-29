@@ -8,7 +8,7 @@ type Author struct {
 	Books []*Book `json:"books,omitempty" orm:"reverse(many)"`
 }
 
-// TableName
+// TableName of the author structure.
 func (*Author) TableName() string {
 	return "author"
 }
