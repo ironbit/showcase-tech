@@ -1,13 +1,13 @@
-# Showcase-Tech
+# Showcase Tech
 
 ## Technologies
 
 * [Golang - Beego - Postgres](./golang-beego-postgres)
 
 ## Golang - Beego - Postgres
-It's a Rest API implementation using Golang (language programming), Beego (Framework), and Postgres (Database).
+It's a Rest API implementation using Golang (language programming), Beego (Framework), and Postgres (Database). It uses a Rest API as the interface, and the information is stored in a database using Postgres.
 
-It's implemented a simple Rest API for a Book and Author entities, known as many to many relationships, which uses as Rest API as the interface and the information is stored in a database using Postgres.
+The entities, Books and Authors, are chosen for the implementation because it's many to many relationships.
 
 The requests are processed using logging and metrics. For that purpose, it is used the decorator pattern (in the golang community, it's known as middleware).
 
