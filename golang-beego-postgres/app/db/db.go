@@ -2,7 +2,10 @@ package db
 
 import (
 	"net/url"
+	"os"
+	"time"
 
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 
@@ -14,9 +17,13 @@ const (
 	scheme      = "postgresql"
 	sslmode     = "sslmode"
 	disable     = "disable"
+
+	connRetry = "connection::retry"
+	connDelay = "connection::delay"
 )
 
-func init() {
+// Init is used to initialize the database.
+func Init() {
 	// url connection
 	conn := getDatabaseURL()
 
@@ -25,12 +32,44 @@ func init() {
 
 	// register database
 	orm.RegisterDriver(driver, orm.DRPostgres)
-	err := orm.RegisterDataBase(defaultName, driver, conn)
+
+	// read 'retry' from config
+	retry, err := beego.AppConfig.Int(connRetry)
 	if err != nil {
-		logs.Error("database error: %v", err)
+		logs.Critical("db | Init | cannot read: %v", err)
+		os.Exit(1)
+	}
+
+	// read 'delay' from config
+	delay, err := beego.AppConfig.Int(connDelay)
+	if err != nil {
+		logs.Critical("db | Init | cannot read: %v", err)
+		os.Exit(1)
+	}
+
+	// log information
+	u, _ := url.Parse(conn)
+	logs.Info("try to connect to database: user: %s | host: %s | database: %s", u.User.Username(), u.Host, u.Path[1:])
+
+	isConnected := false
+	for 0 < retry {
+		err := orm.RegisterDataBase(defaultName, driver, conn)
+		if err != nil {
+			logs.Error("connection error: %v", err)
+			logs.Error("Retry: %d", retry)
+			time.Sleep(time.Duration(delay) * time.Second)
+			retry--
+		} else {
+			isConnected = true
+			break
+		}
+	}
+
+	if isConnected {
+		logs.Info("database connected")
 	} else {
-		u, _ := url.Parse(conn)
-		logs.Info("database connected: user: %s | host: %s | database: %s", u.User.Username(), u.Host, u.Path[1:])
+		logs.Critical("db | Init | cannot connect to database")
+		os.Exit(1)
 	}
 }
 
