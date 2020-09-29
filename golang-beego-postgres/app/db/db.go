@@ -2,10 +2,11 @@ package db
 
 import (
 	"net/url"
-	"os"
 
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+
+	"sketch-tech/golang-beego-postgres/app/tool"
 )
 
 const (
@@ -20,7 +21,7 @@ func init() {
 	conn := getDatabaseURL()
 
 	// driver env
-	driver := getEnv("DATABASE_DRIVER")
+	driver := tool.GetEnv("DATABASE_DRIVER")
 
 	// register database
 	orm.RegisterDriver(driver, orm.DRPostgres)
@@ -32,11 +33,11 @@ func init() {
 
 func getDatabaseURL() string {
 	// environmental variables
-	user := getEnv("DATABASE_USER")
-	pass := getEnv("DATABASE_PASS")
-	host := getEnv("DATABASE_HOST")
-	port := getEnv("DATABASE_PORT")
-	name := getEnv("DATABASE_NAME")
+	user := tool.GetEnv("DATABASE_USER")
+	pass := tool.GetEnv("DATABASE_PASS")
+	host := tool.GetEnv("DATABASE_HOST")
+	port := tool.GetEnv("DATABASE_PORT")
+	name := tool.GetEnv("DATABASE_NAME")
 
 	// create url
 	u := url.URL{}
@@ -54,13 +55,4 @@ func getDatabaseURL() string {
 
 	// url build
 	return u.String()
-}
-
-func getEnv(name string) string {
-	v := os.Getenv(name)
-	if v == "" {
-		logs.Critical("database: %s is not set", name)
-		os.Exit(1)
-	}
-	return v
 }
