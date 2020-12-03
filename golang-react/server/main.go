@@ -33,7 +33,7 @@ func main() {
 			}
 			log.Printf("DATA: %s", string(d))
 			w.Header().Set("Content-Type", "application/json")
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8000")
 			w.Write(d)
 		}
 	}).Methods(http.MethodGet)
@@ -41,7 +41,7 @@ func main() {
 	// POST /product
 	router.HandleFunc("/product", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodOptions {
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8000")
 			w.Header().Set("Access-Control-Allow-Methods", "POST")
 			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 			log.Print("OPTION /product")
@@ -56,7 +56,6 @@ func main() {
 			}
 
 			data = append(data, &p)
-			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
 			log.Printf("POST /product | %v\n", p)
 		}
 	}).Methods(http.MethodPost, http.MethodOptions)
