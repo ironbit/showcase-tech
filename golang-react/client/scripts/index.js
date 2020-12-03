@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDom from 'react-dom';
+import App from './main/App';
+import Config from 'Config';
 
-ReactDOM.render(
-	<h1>Hello World!!</h1>,
-	document.getElementById('app')
-);
+const app = document.getElementById('app');
+
+ReactDom.render(<App serverURL={Config.serverURL}/>, app);
