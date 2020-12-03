@@ -1,20 +1,20 @@
-const path = require('path');
+const paths = require('./paths')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    bundle: path.join(__dirname, 'scripts', 'index.js')
+    bundle: paths.scripts + '/index.js'
   },
 
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: paths.build,
     filename: '[name].js',
     publicPath: '/'
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'html', 'index.html'),
+      template: paths.html + '/index.html',
       filename: 'index.html',
     }),
   ],
@@ -33,18 +33,5 @@ module.exports = {
         }
       }
     }]
-  },
-
-
-  mode: 'development',
-
-  devtool: 'inline-source-map',
-
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-    publicPath: '/',
-    historyApiFallback: true,
-    inline: true,
-    hot: true,
   },
 };
