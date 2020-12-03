@@ -7,6 +7,8 @@ module.exports = merge(base, {
 
   devServer: {
     contentBase: paths.build,
+    host: 'localhost',
+    port: 8000,
     publicPath: '/',
     historyApiFallback: true,
     compress: true,

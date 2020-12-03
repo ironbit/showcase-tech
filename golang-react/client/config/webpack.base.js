@@ -34,4 +34,10 @@ module.exports = {
       }
     }]
   },
+
+  externals: {
+    'Config': JSON.stringify({
+      serverURL: "http://localhost:9000"
+    })
+  },
 };
