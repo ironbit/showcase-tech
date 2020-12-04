@@ -1,10 +1,12 @@
 # Golang - React
 
 ## Description
-It's a simple application that uses **Golang** (Programming Language) in the Server side, and **React** (Javascript Library) in the Client side.
-The application stores and retrieves items (entities - identity and name as properties) using a client-server architecture. The communication is using **Promise** (asynchronous operation) and **CORS** (Cross-Origin Resource Sharing).
-The configuration of the client side is from scratch using **Webpack** (Javascript Module Bundler).
-The communication is using Web Services (REST). The **Axios** library is used in the Client side, and the **Gorilla/Mux*** library is used for the Server Side.
+It's a simple application that uses **Golang** (Programming Language) on the Server side, and **React** (Javascript Library) on the Client side.
+The application stores and retrieves items (entities - identity and name as properties) using a client-server architecture.
+
+The communication is using **Promise** (asynchronous operation) and **CORS** (Cross-Origin Resource Sharing).
+The configuration of the Client side is from scratch using **Webpack** (Javascript Module Bundler).
+The communication is using Web Services (REST). The **Axios** library is used on the Client side, and the **Gorilla/Mux*** library is used for the Server Side.
 As a graphical user interface for the Client side, the **Material-UI** is used.
 
 ---
