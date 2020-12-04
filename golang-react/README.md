@@ -2,18 +2,18 @@
 
 ## Description
 It's a simple application that uses **Golang** (Programming Language) on the Server side, and **React** (Javascript Library) on the Client side.
-The application stores and retrieves items (entities - identity and name as properties) using a client-server architecture.
+The application stores and retrieves items (entities - identity and name as properties) using a client-server architecture. Using Webpack, it's possible to generate the client files in the *build* folder or execute them in the webpack server in both modes (develop and release).
 
 The communication is using **Promise** (asynchronous operation) and **CORS** (Cross-Origin Resource Sharing).
 The configuration of the Client side is from scratch using **Webpack** (Javascript Module Bundler).
-The communication is using Web Services (REST). The **Axios** library is used on the Client side, and the **Gorilla/Mux*** library is used for the Server Side.
+The communication is using Web Services (REST). The **Axios** library is used on the Client side, and the **Gorilla/Mux** library is used for the Server Side.
 As a graphical user interface for the Client side, the **Material-UI** is used.
 
 ---
 
 ## Execution
 ### Client
-* Install package dependency
+* Install package dependencies
 
 ```bash
 # in 'showcase-tech/golang-react/client' folder
