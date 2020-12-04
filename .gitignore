@@ -13,3 +13,7 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Client Side - Javascript
+node_modules/
+package-lock.json
