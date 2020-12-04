@@ -29,7 +29,7 @@ The configuration of the Client side is from scratch using **Webpack** (Javascri
 The communication is using Web Services (REST). The **Axios** library is used on the Client side, and the **Gorilla/Mux** library is used for the Server Side.
 As a graphical user interface for the Client side, the **Material-UI** is used.
 
-The packages used are:
+The technologies used are:
 * Webpack
 * Babel
 * React
